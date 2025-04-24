@@ -1,4 +1,4 @@
-### EX3 Implementation of GSP Algorithm In Python
+### EX : 3 Implementation of GSP Algorithm In Python
 ### DATE: 
 ### AIM: To implement GSP Algorithm In Python.
 ### Description:
@@ -36,6 +36,7 @@ for each wear category.</p>
 <p align="justify">
 8. Visulaize the sequence patterns using matplotlib.
 </p>
+
 ### Program:
 
 ```python
@@ -43,16 +44,24 @@ from collections import defaultdict
 from itertools import combinations
 # Function to generate candidate k-item sequences
 def generate_candidates(dataset, k):
-
-
-    /WRITE YOUR CODE HERE/
-
+    candidates = defaultdict(int)
+    for sequence in dataset:
+        for itemset in combinations(sequence, k):
+            candidates[itemset] += 1
+    return {item: support for item, support in candidates.items() if support >= min_support}
 
 #Function to perform GSP algorithm
 def gsp(dataset, min_support):
-
-
-  /WRITE YOUR CODE HERE/
+    frequent_pattern = defaultdict(int)
+    k = 1
+    sequence = dataset
+    while True:
+      candidates = generate_candidates(sequence, k)
+      if not candidates:
+        break
+      frequent_pattern.update(candidates)
+      k += 1
+    return frequent_pattern
 
 
 #Example dataset for each category
@@ -102,6 +111,7 @@ else:
  print("No frequent sequential patterns found in Party Wear.")
 ```
 ### Output:
+![Screenshot 2024-09-14 090633](https://github.com/user-attachments/assets/50dac3ef-98da-401e-8797-993de3e94ffc)
 
 ### Visualization:
 ```python
@@ -130,6 +140,9 @@ visualize_patterns_line(bottom_wear_result, 'Bottom Wear')
 visualize_patterns_line(party_wear_result, 'Party Wear')
 ```
 ### Output:
+<img src="https://github.com/user-attachments/assets/ead9efb9-4afc-4406-827d-ff2e208a1b9c" width=50%>
+<img src="https://github.com/user-attachments/assets/96154723-e855-4ca8-b462-68fdefff6e7c" width=50%>
 
 
 ### Result:
+Thus the implementation of the GSP algorithm in python has been successfully executed.
